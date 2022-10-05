@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+    env_file:
+      - .env
+    volumes:
+      - db:/var/lib/mysql:/var/lib/mysql
+  
+  wordpress:
+    depends_on:
+      - mariadb
+    build:
+      context: ./requirements/wordpress
+    environment:
+      DB_HOST: mariadb
+      DB_NAME: ${DB_NAME}
+      DB_USER_NAME: ${DB_USER_NAME}
+      DB_USER_PWD: ${DB_USER_PWD}
+    volumes:
+      - wp:/var/www/html/wordpress:/var/www/html/wordpress
+  
+  nginx:
+    depends_on:
+      - wordpress
+    build:
+      context: ./requirements/nginx
+    volumes:
+      - wp:/var/www/html/wordpress:/var/www/html/wordpress
+    ports:
+      - 8000:80
+      - 443:443
+
+volumes:
+  db: {}
+  wp: {}
