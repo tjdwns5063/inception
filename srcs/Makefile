@@ -11,4 +11,4 @@ clean:
 fclean:
 	docker-compose down
 	docker volume rm srcs_db srcs_wp
-	docker rmi srcs-mariadb srcs-wordpress srcs-nginx
+	docker rmi srcs_mariadb srcs_wordpress srcs_nginx
