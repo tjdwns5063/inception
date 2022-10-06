@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     volumes:
-      - db:/var/lib/mysql
+      - /home/db:/var/lib/mysql
   
   wordpress:
     depends_on:
@@ -28,11 +28,7 @@ services:
     build:
       context: ./requirements/nginx
     volumes:
-      - wp:/var/www/html/wordpress
+      - /home/wp:/var/www/html/wordpress
     ports:
       - 443:443
-
-volumes:
-  db:
-  wp:
 
