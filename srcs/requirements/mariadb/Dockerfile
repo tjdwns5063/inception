@@ -12,7 +12,7 @@ COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN service mariadb stop && \
 	chmod 755 /root/script.sh /root/sql.sh && \
-	mkdir -p /run/mysqld /var/lib/mysql && \
+	mkdir -p /run/mysqld /var/lib/mysql && \ 
 	chown -R mysql:mysql /var/lib/mysql /run/mysqld
 
 CMD [ "bash", "/root/script.sh" ]
