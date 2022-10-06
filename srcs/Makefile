@@ -4,7 +4,6 @@ all: $(NAME)
 
 $(NAME):
 	docker-compose up -d
-	docker-compose exec wordpress /root/script.sh
 	docker-compose exec mariadb /root/sql.sh
 
 rebuild: 
@@ -19,5 +18,7 @@ fclean:
 	docker-compose down
 	docker rmi srcs_mariadb srcs_wordpress srcs_nginx
 	docker volume rm srcs_db srcs_wp
+	rm -rf /home/seongjki/data/wp/*
+	rm -rf /home/seongjki/data/db/*
 
 re: fclean all
