@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     volumes:
-      - /home/db:/var/lib/mysql
+      - /home/seongjki/db:/var/lib/mysql
   
   wordpress:
     depends_on:
@@ -20,7 +20,7 @@ services:
       DB_USER_NAME: ${DB_USER_NAME}
       DB_USER_PWD: ${DB_USER_PWD}
     volumes:
-      - wp:/var/www/html/wordpress
+      - /home/seongjki/wp:/var/www/html/wordpress
   
   nginx:
     depends_on:
@@ -28,7 +28,7 @@ services:
     build:
       context: ./requirements/nginx
     volumes:
-      - /home/wp:/var/www/html/wordpress
+      - /home/seongjki/wp:/var/www/html/wordpress
     ports:
       - 443:443
 
