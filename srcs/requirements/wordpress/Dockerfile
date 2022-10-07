@@ -13,6 +13,7 @@ RUN apt-get update -y && apt-get install -y php7.4 \
 	curl \
 	vim \
 	unzip \
+	dumb-init \
 	net-tools && \
 	chmod 755 /root/script.sh /root/setup.sh && \
 	chown -R www-data:www-data /var/www/html/
@@ -20,4 +21,4 @@ RUN apt-get update -y && apt-get install -y php7.4 \
 RUN sed -i 's/listen\ =\ \/run\/php\/php7.4-fpm.sock/listen\ =\ wordpress:9000/g' /etc/php/7.4/fpm/pool.d/www.conf && \
 	service php7.4-fpm start && service php7.4-fpm stop
 
-CMD [ "bash", "/root/script.sh" ]
+ENTRYPOINT [ "dumb-init", "--", "/root/script.sh" ]
