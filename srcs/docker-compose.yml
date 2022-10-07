@@ -1,36 +1,8 @@
 version: "3"
 
-services:
-  mariadb:
-    build:
-      context: ./requirements/mariadb
-    env_file:
-      - .env
-    volumes:
-      - db:/var/lib/mysql
-  
-  wordpress:
-    depends_on:
-      - mariadb
-    build:
-      context: ./requirements/wordpress
-    environment:
-      DB_HOST: mariadb
-      DB_NAME: ${DB_NAME}
-      DB_USER_NAME: ${DB_USER_NAME}
-      DB_USER_PWD: ${DB_USER_PWD}
-    volumes:
-      - wp:/var/www/html/wordpress
-  
-  nginx:
-    depends_on:
-      - wordpress
-    build:
-      context: ./requirements/nginx
-    volumes:
-      - wp:/var/www/html/wordpress
-    ports:
-      - 443:443
+networks:
+  default:
+    name: docker-network
 
 volumes:
   wp:
@@ -46,3 +18,41 @@ volumes:
       device: /home/seongjki/data/db
       o: bind
       type: volume
+
+services:
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+    env_file:
+      - .env
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - default
+
+  wordpress:
+    depends_on:
+      - mariadb
+    build:
+      context: ./requirements/wordpress
+    environment:
+      DB_HOST: mariadb
+      DB_NAME: ${DB_NAME}
+      DB_USER_NAME: ${DB_USER_NAME}
+      DB_USER_PWD: ${DB_USER_PWD}
+    volumes:
+      - wp:/var/www/html/wordpress
+    networks:
+      - default
+  
+  nginx:
+    depends_on:
+      - wordpress
+    build:
+      context: ./requirements/nginx
+    volumes:
+      - wp:/var/www/html/wordpress
+    networks:
+      - default
+    ports:
+      - 443:443
