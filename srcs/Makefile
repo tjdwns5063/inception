@@ -4,7 +4,6 @@ all: $(NAME)
 
 $(NAME):
 	docker-compose up -d
-	docker-compose exec mariadb /root/sql.sh
 
 rebuild: 
 	docker-compose down

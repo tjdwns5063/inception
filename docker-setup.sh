@@ -8,6 +8,10 @@ sudo apt-get install \
     lsb-release \
     make
 
+sudo chmod 777 /etc/resolv.conf
+sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+sudo chmod 755 /etc/resolv.conf
+
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
@@ -25,3 +29,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 mkdir -p /home/seongjki/data
 mkdir -p /home/seongjki/data/wp
 mkdir -p /home/seongjki/data/db
+
+sudo chmod 777 /etc/hosts
+sudo echo "127.0.0.1 seongjki.42.fr" >> /etc/hosts
+sudo chmod 755 /etc/hosts
