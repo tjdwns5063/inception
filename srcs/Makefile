@@ -15,7 +15,7 @@ clean:
 
 fclean:
 	docker-compose down
-	docker rmi srcs_mariadb srcs_wordpress srcs_nginx
+	docker rmi mariadb:inception wordpress:inception nginx:inception
 	docker volume rm srcs_db srcs_wp
 	rm -rf /home/seongjki/data/wp/*
 	rm -rf /home/seongjki/data/db/*

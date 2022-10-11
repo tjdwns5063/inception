@@ -23,6 +23,7 @@ services:
   mariadb:
     build:
       context: ./requirements/mariadb
+    image: mariadb:inception
     env_file:
       - .env
     volumes:
@@ -35,6 +36,7 @@ services:
       - mariadb
     build:
       context: ./requirements/wordpress
+    image: wordpress:inception
     environment:
       DB_HOST: mariadb
       DB_NAME: ${DB_NAME}
@@ -50,6 +52,7 @@ services:
       - wordpress
     build:
       context: ./requirements/nginx
+    image: nginx:inception
     volumes:
       - wp:/var/www/html/wordpress
     networks:
