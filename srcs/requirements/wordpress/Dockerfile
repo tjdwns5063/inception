@@ -7,6 +7,7 @@ RUN mkdir -p /var/www/html/ && \
 	apt-get install -y wget \ 
 	php \
 	php-fpm \
+	php-mysql \
 	mariadb-client \
 	curl \
 	vim \

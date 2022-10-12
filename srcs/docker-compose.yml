@@ -30,6 +30,7 @@ services:
       - db:/var/lib/mysql
     networks:
       - default
+    restart: on-failure
 
   wordpress:
     depends_on:
@@ -37,11 +38,9 @@ services:
     build:
       context: ./requirements/wordpress
     image: wordpress:inception
-    environment:
-      DB_HOST: mariadb
-      DB_NAME: ${DB_NAME}
-      DB_USER_NAME: ${DB_USER_NAME}
-      DB_USER_PWD: ${DB_USER_PWD}
+    env_file:
+      - .env
+    restart: on-failure
     volumes:
       - wp:/var/www/html/
     networks:
@@ -53,6 +52,7 @@ services:
     build:
       context: ./requirements/nginx
     image: nginx:inception
+    restart: on-failure
     volumes:
       - wp:/var/www/html/
     networks:
