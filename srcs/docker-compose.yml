@@ -10,14 +10,14 @@ volumes:
     driver_opts:
       device: /home/seongjki/data/wp
       o: bind
-      type: volume
+      type: none
   
   db:
     driver: local
     driver_opts:
       device: /home/seongjki/data/db
       o: bind
-      type: volume
+      type: none
 
 services:
   mariadb:

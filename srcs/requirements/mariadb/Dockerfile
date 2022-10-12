@@ -14,4 +14,4 @@ RUN mkdir -p /run/mysqld /var/lib/mysql && \
 	chown -R mysql:mysql /var/lib/mysql /run/mysqld && \
 	chmod 777 /root/script.sh
 
-ENTRYPOINT [ "dumb-init", "--", "/root/script.sh" ]
+ENTRYPOINT [ "/usr/bin/dumb-init", "--", "/root/script.sh" ]

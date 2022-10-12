@@ -18,4 +18,4 @@ RUN mkdir -p /var/www/html/ && \
 	sed -i 's/listen\ =\ \/run\/php\/php7.3-fpm.sock/listen\ =\ wordpress:9000/g' /etc/php/7.3/fpm/pool.d/www.conf && \
 	service php7.3-fpm start && service php7.3-fpm stop
 
-ENTRYPOINT [ "dumb-init", "--", "/root/script.sh" ]
+ENTRYPOINT [ "usr/bin/dumb-init", "--", "/root/script.sh" ]
